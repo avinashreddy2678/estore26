@@ -86,7 +86,7 @@ const Cart = () => {
     );
 
     const res = await axios.post(
-      `${helper}Orders/payment/checkout`,
+      `${helper}/Orders/payment/checkout`,
       {
         name: name,
         phonenumber: phonenumber,
