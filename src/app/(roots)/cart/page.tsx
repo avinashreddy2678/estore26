@@ -17,6 +17,7 @@ import Footer from "@/app/Components/Footer";
 import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
 import axios from "axios";
+import helper from "@/helpers/helper";
 
 interface ItemProps {
   productid: string;
@@ -29,6 +30,7 @@ declare global {
 }
 
 const Cart = () => {
+  
   const [name, setname] = useState("");
   const [phonenumber, setphonenumber] = useState("");
   const [fulladdress, setfulladdress] = useState("");
@@ -80,11 +82,11 @@ const Cart = () => {
       return toast.error("Please fill all details before placing order");
     }
     const { data: key } = await axios.get(
-      "http://localhost:4001/Orders/getKey"
+      `${helper}/Orders/getKey`
     );
 
     const res = await axios.post(
-      "http://localhost:4001/Orders/payment/checkout",
+      `${helper}Orders/payment/checkout`,
       {
         name: name,
         phonenumber: phonenumber,
@@ -103,7 +105,7 @@ const Cart = () => {
       description: "Test Transaction",
       image: "https://example.com/your_logo",
       order_id: res?.data?.orders.id,
-      callback_url: "http://localhost:4001/Orders/paymentverifcation",
+      callback_url: `${helper}/Orders/paymentverifcation`,
       prefill: {
         name: "Avinash",
         email: "avinash@avinash.com",

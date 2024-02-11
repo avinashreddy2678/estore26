@@ -15,7 +15,6 @@ interface ProductProps {
   product: Products;
 }
 const ProductCard: React.FC<ProductProps> = ({ product }) => {
-  const router = useRouter();
   const dispatch = useDispatch();
 
   return (

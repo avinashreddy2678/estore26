@@ -26,6 +26,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Checkbox } from "@/components/ui/checkbox";
+import helper from "@/helpers/helper";
 
 const CartProductCard = ({ item }: any) => {
   const dispatch = useDispatch();
@@ -42,14 +43,13 @@ const CartProductCard = ({ item }: any) => {
     productid: item._id,
     selectedSize: "",
   });
-
   const checkInOrder = async (id: string) => {
     const storedItem = localStorage.getItem("ProductInOrder") ?? "[]";
     const getItem = storedItem ? JSON.parse(storedItem) : [];
     if (getItem?.length > 0) {
       const size = getItem.find((item: any) => item.productid === id);
       const res = await axios.get(
-        `http://localhost:4001/Orders/CheckInOrder/${id}/${size.size}`
+        `${helper}/Orders/CheckInOrder/${id}/${size.size}`
       );
       if (res.data.message === "Remove") {
         setcolor(false);
@@ -65,7 +65,7 @@ const CartProductCard = ({ item }: any) => {
       return toast.error("Please select Size");
     }
     const res = await axios.get(
-      `http://localhost:4001/Orders/CheckAvailbility/${id}/${singleItems.selectedSize}`
+      `${helper}/Orders/CheckAvailbility/${id}/${singleItems.selectedSize}`
     );
     if (res.data.message === "Available") {
       toast.success(res.data.message);
