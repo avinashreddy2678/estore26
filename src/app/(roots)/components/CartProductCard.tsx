@@ -43,6 +43,8 @@ const CartProductCard = ({ item }: any) => {
     productid: item._id,
     selectedSize: "",
   });
+
+
   const checkInOrder = async (id: string) => {
     const storedItem = localStorage.getItem("ProductInOrder") ?? "[]";
     const getItem = storedItem ? JSON.parse(storedItem) : [];
@@ -81,7 +83,7 @@ const CartProductCard = ({ item }: any) => {
       localStorage.setItem("ProductInOrder", updatedStoredItem);
       setTimeout(() => {
         checkInOrder(id);
-      }, 15 * 60 * 1000);
+      }, 10 *60 * 1000);
     } else {
       toast.error("Not available");
     }

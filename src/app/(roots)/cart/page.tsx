@@ -71,7 +71,6 @@ const Cart = () => {
       alert("Razorpay SDK Failed to load");
       return;
     }
-    // console.log(window?.Razorpay)
 
     if (
       name === "" ||
@@ -96,6 +95,7 @@ const Cart = () => {
         products: checkoutselector,
       }
     );
+    localStorage.removeItem("ProductInOrder");
 
     const options = {
       key: key.key_secret,
@@ -121,6 +121,7 @@ const Cart = () => {
 
     const paymentObject = window.Razorpay(options);
     paymentObject.open();
+    
   };
 
   return (
